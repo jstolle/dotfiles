@@ -1,7 +1,0 @@
-#!/bin/sh
-
-HOST=ec2-54-244-160-225.us-west-2.compute.amazonaws.com
-USER=Administrator
-PWD=RH1cr0npw
-
-xfreerdp -u ${USER} -p ${PWD} -g 924x500 ${HOST} &

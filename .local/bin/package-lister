@@ -1,0 +1,63 @@
+#!/usr/bin/env sh
+# Stolen from https://gitlab.com/ambrevar/dotfiles/blob/master/.local/bin/package-lister
+set -xv
+
+## Create lists of system- and TeX Live packages.
+
+## Variables
+PKG_ROOT="$HOME/.package-lists"
+mkdir -p "$PKG_ROOT"
+
+## Arch Linux
+if command -v pacman >/dev/null 2>&1; then
+    pacman -Qneq | LC_ALL=C sort >"$PKG_ROOT/arch-official"
+    pacman -Qmeq | LC_ALL=C sort >"$PKG_ROOT/arch-aur"
+fi
+
+## TeXlive
+if ! command -v guix >/dev/null 2>&1; then
+    if command -v tlmgr >/dev/null 2>&1; then
+	tlctl l >"$PKG_ROOT/texlive"
+    fi
+fi
+
+## Guix
+if command -v guix >/dev/null 2>&1; then
+    cat<<EOF>"$PKG_ROOT/guix"
+(specifications->manifest
+ '(
+EOF
+    guix package -I | awk '{printf("\"%s", $1); if($3!="out") {printf("%s", ":" $3)}; print "\""}' | LC_ALL=C sort >>"$PKG_ROOT/guix"
+    echo "))" >>"$PKG_ROOT/guix"
+
+    guix --version >"$PKG_ROOT/guix-version"
+fi
+
+## Nix
+if command -v nix-env >/dev/null 2>&1; then
+    nix-env --query | LC_ALL=C sort >"$PKG_ROOT/nix"
+fi
+
+## Homebrew
+if command -v brew >/dev/null 2>&1; then
+    ## TODO: Properly split this up
+    brew list | sort >"$PKG_ROOT/brew-official"
+fi
+
+YELLOW='\033[0;33m\033[1m'
+BOLD='\033[0m\033[1m'
+NORMAL='\033[0m'
+message() {
+    echo -e "$YELLOW:: $@$NORMAL"
+}
+status() {
+    local title=$1
+    local body=$2
+
+    [ -z "$body" ] && return
+    message "$title"
+    echo "$body"
+}
+
+status "Unpushed files" "$(git -C "$PKG_ROOT" diff --cached --name-only .)"
+status "Unstaged files" "$(git -C "$PKG_ROOT" diff --name-only .)"
