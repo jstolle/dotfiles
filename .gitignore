@@ -1,5 +1,3 @@
-xmonad/xmonad.errors
-xmonad/xmonad.hi
-xmonad/xmonad.o
-xmonad/xmonad-x86_64-linux
 *.keyfile
+.tmux/plugins/tpm
+.zsh-custom/bullet-train.zsh-theme

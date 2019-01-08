@@ -1,4 +1,9 @@
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+
+export PATH=$GOBIN:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh

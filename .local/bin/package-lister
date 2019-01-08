@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 # Stolen from https://gitlab.com/ambrevar/dotfiles/blob/master/.local/bin/package-lister
-set -xv
 
 ## Create lists of system- and TeX Live packages.
 
@@ -40,8 +39,9 @@ fi
 
 ## Homebrew
 if command -v brew >/dev/null 2>&1; then
-    ## TODO: Properly split this up
-    brew list | sort >"$PKG_ROOT/brew-official"
+    brew tap | grep -v 'homebrew' | LC_ALL=C sort >"$PKG_ROOT/brew-taps"
+    brew list | LC_ALL=C sort >"$PKG_ROOT/brew-official"
+    brew cask list | LC_ALL=C sort >"$PKG_ROOT/brew-casks"
 fi
 
 YELLOW='\033[0;33m\033[1m'

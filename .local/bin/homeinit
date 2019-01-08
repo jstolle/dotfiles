@@ -85,8 +85,8 @@ popd
 echo "==> System packages"
 if command -v pacman >/dev/null 2>&1; then
     pacman_list=""
-    if [ -f ~/.pkglists/arch-official ]; then
-        pacman_list="$(cat ~/.pkglists/arch-official)"
+    if [ -f ~/.package-lists/arch-official ]; then
+        pacman_list="$(cat ~/.package-lists/arch-official)"
     fi
     sudo pacman --noconfirm -S --needed base base-devel $pacman_list
     if ! command -v cower >/dev/null 2>&1; then
@@ -103,8 +103,8 @@ if command -v pacman >/dev/null 2>&1; then
         makepkg --noconfirm -si
         popd
     fi
-    if $OPT_UPDATE && [ -f ~/.pkglists/arch-aur ]; then
-        pacaur --noconfirm --noedit -y --needed "$(cat ~/.pkglists/arch-aur)"
+    if $OPT_UPDATE && [ -f ~/.package-lists/arch-aur ]; then
+        pacaur --noconfirm --noedit -y --needed "$(cat ~/.package-lists/arch-aur)"
     fi
     pacman_list=$(pacman -Qdtq)
     if [ -n "$pacman_list" ]; then
@@ -113,7 +113,7 @@ if command -v pacman >/dev/null 2>&1; then
 elif command -v nix-env >/dev/null 2>&1; then
     nix-env --install --from-profile ~/.package-lists/nix
 elif command -v brew >/dev/null 2>&1; then
-    for tap in $(cat ~/.pkglists/brew-taps); do
+    for tap in $(cat ~/.package-lists/brew-taps); do
 	local this_tap=$(echo $tap | tr ',' ' ')
 	local tap_name=$(echo $tap | cut -f 1 -d ',')
 	brew untap $tap_name 2>/dev/null
@@ -121,8 +121,8 @@ elif command -v brew >/dev/null 2>&1; then
     done
 
     brew update
-    brew install $(cat ~/.pkglists/brew-official)
-    brew cask install $(cat ~/.pkglists/brew-thirdparty)
+    brew install $(cat ~/.package-lists/brew-official)
+    brew cask install $(cat ~/.package-lists/brew-casks)
 fi
 
 echo "==> Bookmarks"
