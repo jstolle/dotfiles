@@ -1,20 +1,2 @@
-
-==> Auto-updated Homebrew!
-==> Updated Formulae
-Fast-forwarded master to origin/master.
-azure-cli
-bash
-citus
-jabba
-jenkins
 koekeishiya/formulae
-libidn2
-libpsl
-picard-tools
-rabbitmq
-swiftlint
-tor
-vegeta
 wallix/awless
-wget
-whois
