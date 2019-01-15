@@ -39,7 +39,7 @@ fi
 
 ## Homebrew
 if command -v brew >/dev/null 2>&1; then
-    brew tap | grep -v 'homebrew' | LC_ALL=C sort >"$PKG_ROOT/brew-taps"
+    brew tap | grep -v 'homebrew/core' | LC_ALL=C sort >"$PKG_ROOT/brew-taps"
     brew list | LC_ALL=C sort >"$PKG_ROOT/brew-official"
     brew cask list | LC_ALL=C sort >"$PKG_ROOT/brew-casks"
 fi
