@@ -4,7 +4,7 @@
 ## Create lists of system- and TeX Live packages.
 
 ## Variables
-PKG_ROOT="$HOME/.package-lists"
+PKG_ROOT="$HOME/.config/package-lists"
 mkdir -p "$PKG_ROOT"
 
 ## Arch Linux
