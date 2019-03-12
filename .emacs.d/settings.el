@@ -16,21 +16,12 @@
  '(custom-buffer-done-function (quote kill-buffer))
  '(custom-file "~/.emacs.d/settings.el")
  '(custom-raised-buttons nil)
- '(doom-modeline-buffer-file-name-style 'truncate-upto-project)
- '(doom-modeline-python-executable "python")
- '(doom-modeline-icon t)
- '(doom-modeline-major-mode-icon t)
- '(doom-modeline-major-mode-color-icon nil)
- '(doom-modeline-minor-modes nil)
- '(doom-modeline-persp-name t)
- '(doom-modeline-lsp t)
- '(doom-modeline-github nil)
- '(doom-modeline-version t)
- '(doom-themes-enable-bold t)
- '(doom-themes-enable-italic t)
- '(doom-theme-name "doom-one")
+ '(custom-safe-themes
+   (quote
+    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(font-lock-support-mode (quote jit-lock-mode))
  '(font-lock-verbose nil)
+ '(frame-background-mode 'dark)
  '(frame-title-format
    (quote
     (:eval
@@ -226,7 +217,7 @@
  '(recentf-auto-cleanup 60)
  '(recentf-exclude
    (quote
-    ("~\\'" "\\`out\\'" "\\.log\\'" "^/[^/]*:" "\\.el\\.gz\\'")))
+    ("~\\'" "\\`out\\'" "\\.log\\'" "^/[^/]*:" "\\.el\\.gz\\'")) t)
  '(recentf-max-saved-items 2000)
  '(recentf-save-file "~/.emacs.d/data/recentf")
  '(redisplay-dont-pause t t)
@@ -325,4 +316,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-)
+ )
