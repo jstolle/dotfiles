@@ -26,6 +26,7 @@ PROJECTDIR="$HOME/projects"
 MYGIT="git@github.com:jstolle"
 [ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME="$HOME/.config"
 [ -z "$XDG_DATA_HOME" ] && XDG_DATA_HOME="$HOME/.local/share"
+[ -z "$XDG_CACHE_HOME" ] && XDG_CACHE_HOME="$HOME/.cache"
 
 ## ln no-clobber
 lnn() {
@@ -48,22 +49,22 @@ elif command -v brew >/dev/null 2>&1; then
 fi
 
 echo "==> GPG"
-if [ -d ~/.gnupg ]; then
-    chmod go-rwx ~/.gnupg ~/.gnupg/*
+if [ -d $XDG_DATA_HOME/gnupg ]; then
+    chmod go-rwx $XDG_DATA_HOME/gnupg $XDG_DATA_HOME/gnupg/*
     if [ -e "$SOURCEDIR" ]; then
         git -C "$SOURCEDIR" pull
     else
         git clone "$MYGIT/personal"
     fi
-    if [ -e ~/.password-store ]; then
-        git -C ~/.password-store pull
+    if [ -e $XDG_DATA_HOME/password-store ]; then
+        git -C $XDG_DATA_HOME/password-store pull
     else
-        git clone "$MYGIT/password-store" ~/.password-store
+        git clone "$MYGIT/password-store" $XDG_DATA_HOME/password-store
         ## The following is necessary to make sure the 'diff' GPG filter is properly set up.
         pass git init
     fi
 else
-    echo "~/.gnupg not found."
+    echo "$XDG_DATA_HOME/gnupg not found."
 fi
 
 echo "==> Persistent folders"
@@ -78,15 +79,12 @@ if [ -e ~/dotfiles ]; then
 else
     git clone "$MYGIT/dotfiles"
 fi
-pushd ~/dotfiles
-stow -v .
-popd
 
 echo "==> System packages"
 if command -v pacman >/dev/null 2>&1; then
     pacman_list=""
-    if [ -f ~/.package-lists/arch-official ]; then
-        pacman_list="$(cat ~/.package-lists/arch-official)"
+    if [ -f $XDG_DATA_HOME/package-lists/arch-official ]; then
+        pacman_list="$(cat $XDG_DATA_HOME/package-lists/arch-official)"
     fi
     sudo pacman --noconfirm -S --needed base base-devel $pacman_list
     if ! command -v cower >/dev/null 2>&1; then
@@ -103,26 +101,24 @@ if command -v pacman >/dev/null 2>&1; then
         makepkg --noconfirm -si
         popd
     fi
-    if $OPT_UPDATE && [ -f ~/.package-lists/arch-aur ]; then
-        pacaur --noconfirm --noedit -y --needed "$(cat ~/.package-lists/arch-aur)"
+    if $OPT_UPDATE && [ -f $XDG_DATA_HOME/package-lists/arch-aur ]; then
+        pacaur --noconfirm --noedit -y --needed "$(cat $XDG_DATA_HOME/package-lists/arch-aur)"
     fi
     pacman_list=$(pacman -Qdtq)
     if [ -n "$pacman_list" ]; then
         sudo pacman --noconfirm -Rs "$pacman_list"
     fi
 elif command -v nix-env >/dev/null 2>&1; then
-    nix-env --install --from-profile ~/.package-lists/nix
+    nix-env --install --from-profile $XDG_DATA_HOME/package-lists/nix
 elif command -v brew >/dev/null 2>&1; then
-    for tap in $(cat ~/.package-lists/brew-taps); do
-	local this_tap=$(echo $tap | tr ',' ' ')
-	local tap_name=$(echo $tap | cut -f 1 -d ',')
-	brew untap $tap_name 2>/dev/null
-	brew tap $this_tap
+    for tap in $(cat $XDG_DATA_HOME/package-lists/brew-taps); do
+	brew untap $tap 2>/dev/null
+	brew tap $tap
     done
 
     brew update
-    brew install $(cat ~/.package-lists/brew-official)
-    brew cask install $(cat ~/.package-lists/brew-casks)
+    brew install $(cat $XDG_DATA_HOME/package-lists/brew-official)
+    brew cask install $(cat $XDG_DATA_HOME/package-lists/brew-casks)
 fi
 
 echo "==> Bookmarks"
@@ -169,12 +165,12 @@ if command -v emacs >/dev/null 2>&1; then
     if ! command -v guix >/dev/null 2>&1; then
         if $OPT_UPDATE; then
             echo "==> Emacs ELPA packages"
-            yes | emacs --batch -l ~/.emacs.d/init.el --eval '(progn (package-refresh-contents) (package-install-selected-packages))'
+            yes | emacs --batch -l $XDG_DATA_HOME/emacs.d/init.el --eval '(progn (package-refresh-contents) (package-install-selected-packages))'
         fi
     fi
     echo "==> Emacs extra packages"
-    mkdir -pv ~/.local/share/emacs/site-lisp
-    for i in ~/.local/share/emacs/site-lisp/*; do
+    mkdir -pv $XDG_DATA_HOME/local/share/emacs/site-lisp
+    for i in $XDG_DATA_HOME/local/share/emacs/site-lisp/*; do
         echo "$i"
         git -C "$i" pull
     done
@@ -188,30 +184,30 @@ while IFS= read -r i; do
     ## We get a shell command, so we need to evaluate it to expand "~".
     eval "$i"
 done <<EOF
-$(awk '/^Path/ {$1="mkdir -pv"; print}' ~/.mbsyncrc)
+$(awk '/^Path/ {$1="mkdir -pv"; print}' $XDG_DATA_HOME/mbsyncrc)
 EOF
 
 if $OPT_UPDATE; then
     mbsync -aV
-    mu index --maildir=~/.cache/mail
+    mu index --maildir=$XDG_DATA_HOME/cache/mail
 fi
 
 if [ "${SHELL##*/}" = zsh ]; then
     echo "==> Oh-My-Zsh"
-    if [ -e ~/.oh-my-zsh ]; then
-	git -C ~/.oh-my-zsh pull
+    if [ -e $PROJECTDIR/oh-my-zsh ]; then
+        git -C $PROJECTDIR/oh-my-zsh pull
     else
-	git clone "$MYGIT/oh-my-zsh" ~/.oh-my-zsh
+        git clone -C "$PROJECTDIR" "$MYGIT/oh-my-zsh"
     fi
 
     echo "==> Bullet Train Theme"
     if [ -e $PROJECTDIR/bullet-train.zsh ]; then
-	git -C "$PROJECTDIR/bullet-train.zsh" pull
+        git -C "$PROJECTDIR/bullet-train.zsh" pull
     else
-	git -C "$PROJECTDIR" clone "$MYGIT/bullet-train.zsh"
+        git -C "$PROJECTDIR" clone "$MYGIT/bullet-train.zsh"
     fi
 
-    lnn "$PROJECTDIR/bullet-train.zsh/bullet-train.zsh-theme" "$HOME/dotfiles/.zsh-custom"
+    lnn "$PROJECTDIR/bullet-train.zsh/bullet-train.zsh-theme" "$HOME/dotfiles/.config/zsh/custom"
 fi
 
 echo "==> TMUX"
@@ -221,3 +217,7 @@ else
     git -C "$PROJECTDIR" clone "$MYGIT/tpm"
 fi
 lnn "$PROJECTDIR/tpm" ~/dotfiles/.tmux/plugins
+
+pushd ~/dotfiles
+stow -v .
+popd
