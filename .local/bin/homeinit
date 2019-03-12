@@ -98,8 +98,9 @@ if command -v pacman >/dev/null 2>&1; then
     fi
     if ! command -v pacaur >/dev/null 2>&1; then
         mkdir -p /tmp
+        pushd /tmp
         cower -d pacaur
-        pushd /tmp/pacaur
+	cd pacaur
         makepkg --noconfirm -si
         popd
     fi

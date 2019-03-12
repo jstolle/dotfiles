@@ -170,20 +170,20 @@
   :defer t
   :hook (after-init . all-the-icons-install-fonts))
 
-(use-package doom-modeline
-  :after all-the-icons
-  :ensure t
-  :defer t
-  :hook (after-init . doom-modeline-init))
+;; (use-package doom-modeline
+;;   :after all-the-icons
+;;   :ensure t
+;;   :defer t
+;;   :hook (after-init . doom-modeline-init))
 
-(use-package doom-themes
-  :if window-system
-  :ensure t
-  :defer t
-  :hook (after-init . ((load-theme doom-theme-name t)
-                       (doom-themes-visual-bell-config)
-                       (doom-themes-treemacs-config)
-                       (doom-themes-org-config))))
+;; (use-package doom-themes
+;;   :if window-system
+;;   :ensure t
+;;   :defer t
+;;   :hook (after-init . ((load-theme doom-theme-name t)
+;;                        (doom-themes-visual-bell-config)
+;;                        (doom-themes-treemacs-config)
+;;                        (doom-themes-org-config))))
 
 (use-package smart-newline
   :diminish
@@ -423,7 +423,7 @@
   :commands ztree-diff)
 
 ;;; Layout
-
+(load-theme 'solarized t)
 
 ;;; Finalization
 
