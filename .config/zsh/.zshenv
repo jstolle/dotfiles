@@ -16,3 +16,21 @@ export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
 # Path
 export PATH=$GOBIN:$HOME/.local/bin:/usr/local/bin:$PATH
+
+# Node Version Manager
+export NVM_DIR="$HOME/.nvm"
+
+# Man path
+export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Editor settings
+export EDITOR=nvim
+export GIT_EDITOR="$EDITOR"
+export VISUAL="$EDITOR"
+
+# ssh
+export SSH_KEY_PATH="~/.ssh/rsa_id"
+

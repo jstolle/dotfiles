@@ -1,4 +1,4 @@
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh-completions /usr/local/share/zsh/site-functions "${fpath[@]}")
 
 # Path to your oh-my-zsh installation.
 export ZSH=$XDG_CONFIG_HOME/oh-my-zsh
@@ -17,36 +17,45 @@ ZSH_CUSTOM=$XDG_CONFIG_HOME/zsh/custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git terraform aws tmux jst-tmux)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    ## Default text editor
-    ## 'em' is a custom wrapper for emacsclient. See '.bin/em'.
-    ## VISUAL is given priority by some programs like Mutt. This way we can separate
-    ## editors that wait from those that don't.
-    for i in emacsclient em emacs vim vi nano; do
-	command -v $i >/dev/null 2>&1 && export EDITOR=$i && break
-    done
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#     export EDITOR='nvim'
+# else
+#     ## Default text editor
+#     ## 'em' is a custom wrapper for emacsclient. See '.bin/em'.
+#     ## VISUAL is given priority by some programs like Mutt. This way we can separate
+#     ## editors that wait from those that don't.
+#     for i in emacsclient em emacs nvim vim vi nano; do
+#         command -v $i >/dev/null 2>&1 && export EDITOR=$i && break
+#     done
+# fi
 
-GIT_EDITOR="$EDITOR"
-VISUAL="$EDITOR"
-[ "$GIT_EDITOR" = em ] && GIT_EDITOR=emc
-[ "$VISUAL" = em ] && VISUAL=emw
-export GIT_EDITOR
-export VISUAL
+# Pyenv
+eval "$(pyenv init -)"
 
-# ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
+# Autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# NVM
+[ -s /usr/local/opt/nvm/nvm.sh ] && . /usr/local/opt/nvm/nvm.sh 
+
+## Completions
+# AWS
+completer=$(whence aws_zsh_completer.sh)
+[ -n "${completer}" ] && . "${completer}"
+
+# Git Flow
+[ -f /usr/local/share/zsh/site-functions/git-flow-completion.zsh ] && . /usr/local/share/zsh/site-functions/git-flow-completion.zsh
+
+alias vim=nvim
+
+# Syntax highlighting
+highlights="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f $highlights ] && . $highlights

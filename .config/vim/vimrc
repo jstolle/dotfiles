@@ -12,6 +12,7 @@ set softtabstop=0
 set expandtab
 set smarttab
 set relativenumber
+set number
 set autoindent
 
 filetype plugin on
