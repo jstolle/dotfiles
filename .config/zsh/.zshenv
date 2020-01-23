@@ -7,9 +7,14 @@ export XDG_DATA_HOME=$HOME/.local/share
 export GOPATH=$HOME/Go
 export GOBIN=$GOPATH/bin
 
+# Antigen config
+export ADOTDIR=$XDG_CONFIG_HOME/antigen
+export ANTIGEN_LOCK=$ADOTDIR
+
 # ZSH config
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 export HISTFILE=$XDG_DATA_HOME/zsh/history_$$
+export HIST_STAMPS="yyyy-mm-dd"
 
 # Vim config
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
