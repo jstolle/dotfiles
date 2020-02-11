@@ -1,22 +1,94 @@
-source $XDG_CONFIG_HOME/antigen/antigenrc
+# Leave if not interactive
+[[ $- != *i* ]] && return
 
-fpath=(/usr/local/share/zsh/site-functions "${fpath[@]}")
+# Pretty colors
+autoload -U colors && colors
 
-# Pyenv
-eval "$(pyenv init -)"
+# History
+export HISTSIZE=1000000
+export HISTFILE=$XDG_DATA_HOME/zsh/history_$$
+export HIST_STAMPS="yyyy-mm-dd"
 
-# NVM
-[ -s /usr/local/opt/nvm/nvm.sh ] && . /usr/local/opt/nvm/nvm.sh 
+# Tab completion
+autoload -U compinit
+zstyle ':completion:*' menu select
+# Auto complete with case insenstivity
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-alias vim=nvim
+#zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
 
-# my tmux extras
-function ttl() {
-  # Return immediately if not in a tmux session
-  [[ -z "$TMUX" ]] && return
-  newtitle=$1
-  echo "\ek${newtitle}\e\\"
-}
+# Syntax highlighting
+source $XDG_CONFIG_HOME/zsh/addons/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# emacs mode
+bindkey -e
+
+# Command line editing
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+
+# Search history
+#bindkey '^R' history-incremental-pattern-search-backward
+
+# Source configs
+for conf in $HOME/.config/shellconfig/*.zsh; do source "$conf" ; done
+
+SPACESHIP_PROMPT_ORDER=(
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  exec_time     # Execution time
+  line_sep      # Line break
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+SPACESHIP_RPROMPT_ORDER=(
+  docker        # Docker section
+  aws           # Amazon Web Services section
+  pyenv         # Pyenv section
+  terraform     # Terraform workspace section
+  golang        # Go section
+  node          # Node.js section
+)
+SPACESHIP_AWS_SHOW=true
+SPACESHIP_CHAR_SUFFIX=" "
+SPACESHIP_CHAR_SYMBOL=❯
+SPACESHIP_CONDA_SHOW=false
+SPACESHIP_DOCKER_CONTEXT_SHOW=true
+SPACESHIP_DOCKER_SHOW=true
+SPACESHIP_DOTNET_SHOW=false
+SPACESHIP_ELIXIR_SHOW=false
+SPACESHIP_ELM_SHOW=false
+SPACESHIP_EMBER_SHOW=false
+SPACESHIP_GOLANG_SHOW=true
+SPACESHIP_HG_SHOW=false
+SPACESHIP_JOBS_SHOW=false
+SPACESHIP_JULIA_SHOW=false
+SPACESHIP_KUBECONTEXT_SHOW=false
+SPACESHIP_NODE_SHOW=true
+SPACESHIP_PACKAGE_SHOW=true
+SPACESHIP_PHP_SHOW=false
+SPACESHIP_PROMPT_ADD_NEWLINE=true
+SPACESHIP_PROMPT_SEPARATE_LINE=true
+SPACESHIP_PYENV_SHOW=true
+SPACESHIP_RUBY_SHOW=false
+SPACESHIP_RUST_SHOW=false
+SPACESHIP_SWIFT_SHOW_LOCAL=false
+SPACESHIP_TERRAFORM_SHOW=true
+SPACESHIP_USER_SHOW=always
+SPACESHIP_VENV_SHOW=false
+SPACESHIP_VI_MODE_SHOW=false
+SPACESHIP_XCODE_SHOW_LOCAL=false
+
+autoload -U promptinit; promptinit
+prompt spaceship
+
+set -o emacs
 
 # Random password generator
 function genpass () {
@@ -26,21 +98,4 @@ function genpass () {
     echo -n "$firstletter$otherletters"
   done | gtr 'i' '1' | gtr 'a' '@' | gtr 'o' '0'
   echo ""
-}
-
-# Terraform execution
-function tf() {
-  planfilename="$(basename $(pwd)).plan"
-  planfile_dir="${2:-..}/plans"
-  [ -d $planfile_dir ] || { >&2 echo "Plans directory ($planfile_dir)" && return 1 }
-  planfile="${planfile_dir}/${planfilename}"
-
-  case $1 in
-    plan    ) terraform plan -out=$planfile ;;
-    destroy ) terraform plan -destroy -out=$planfile ;;
-    init    ) terraform init ;;
-    apply   ) terraform apply $planfile ;;
-    val     ) terraform validate ;;
-    *       ) { >&2 echo "Unknown tf operation: $1" && return 1}
-  esac
 }
