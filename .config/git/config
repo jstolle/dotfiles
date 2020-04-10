@@ -9,7 +9,7 @@
 	co = checkout
 	cp = cherry-pick
 	df = diff
-        dfc = diff --cached
+  dfc = diff --cached
 	fp = format-patch
 	lg = log -p
 	st = status
@@ -19,3 +19,5 @@
 	template = /Users/jostol01/.config/git/stCommitMsg
 [url "ssh://git@bitbucket.org/metrospot/"]
 	insteadOf = https://bitbucket.org/metrospot/
+[url "ssh://git@github.com/rh-innovation/"]
+	insteadOf = https://github.com/rh-innovation/
