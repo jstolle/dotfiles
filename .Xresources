@@ -58,8 +58,14 @@
 
 
 !! Default font
-*faceName:Source Code Pro for Powershell:pixelsize=12
-
+!!*faceName:xft:Terminess Powerline:pixelsize=16
+!!*font:-xos4-Terminess Powerline:pixelsize=16
+!! *faceName: -xos4-terminess powerline-medium-*-*-*-14-*-*-*-*-*-*-*,xft:Terminess-Powerline:pixelsize:16
+!! *font: -xos4-terminess powerline-medium-*-*-*-16-*-*-*-*-*-*-*,xft:Terminess-Powerline:pixelsize=16
+!! *boldFont: -xos4-terminess powerline-bold-*-*-*-14-*-*-*-*-*-*-*,xft:Terminess-Powerline:bold:pixelsize:16
+*faceName: -xos4-terminess powerline-bold-*-*-*-14-*-*-*-*-*-*-*,xft:Terminess-Powerline:pixelsize:16
+*font: -xos4-terminess powerline-bold-*-*-*-14-*-*-*-*-*-*-*,xft:Terminess-Powerline:pixelsize=16
+*boldFont: -xos4-terminess powerline-bold-*-*-*-14-*-*-*-*-*-*-*,xft:Terminess-Powerline:bold:pixelsize:16
 
 !! Xft options
 Xft.hinting: true
