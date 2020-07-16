@@ -1,1 +1,0 @@
-/Users/jostol01/projects/bullet-train.zsh/bullet-train.zsh-theme

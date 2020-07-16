@@ -11,20 +11,21 @@ export GOPATH=$HOME/Go
 export GOBIN=$GOPATH/bin
 
 typeset -U PATH path
-path=("$HOME/scripts" "$HOME/.local/bin" "$GOBIN" "$path[@]")
+path=("/nix/var/nix/profiles/default/bin" "$HOME/scripts" "$HOME/.local/bin" "$GOBIN" "$path[@]" "/usr/sbin" "/sbin" "/usr/local/sbin")
 export PATH
 
-export EDITOR="nvim"
-export GIT_EDITOR="nvim"
+export EDITOR="em"
+export GIT_EDITOR="ec"
 export READER="zathura"
-export VISUAL="nvim"
+export VISUAL="ec"
 export CODEEDITOR="em"
-export TERMINAL="alacritty"
-export BROWSER="brave"
+export TERMINAL="hyper"
+export BROWSER="firefox"
 export COLORTERM="truecolor"
 export OPENER="xdg-open"
 export PAGER="less"
 export WM="bspwm"
+export HISTFILE="${XDG_CACHE_HOME}/.zsh_history_$$"
 
 #export LESS_TERMCAP_mb=$'\e[1;32m'
 #export LESS_TERMCAP_md=$'\e[1;32m'
@@ -57,5 +58,14 @@ export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="~/.ssh/id_ed25519"
+
+# gpg
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+gpg2 --homedir "$XDG_DATA_HOME"/gnupg
+
+# zsh highlighting
+if [ -d /usr/local/share/zsh-syntax-highlighting/highlighters ];then
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+fi
 

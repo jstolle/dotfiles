@@ -4,12 +4,6 @@
 [submodule "backups/backups"]
 	path = backups/backups
 	url = https://github.com/jstolle/backups.git
-[submodule ".config/zsh/addons/alias-tips"]
-	path = .config/zsh/addons/alias-tips
-	url = https://github.com/djui/alias-tips.git
 [submodule ".config/zsh/addons/zsh-completions"]
 	path = .config/zsh/addons/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
-[submodule ".config/zsh/addons/zsh-syntax-highlighting"]
-	path = .config/zsh/addons/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git

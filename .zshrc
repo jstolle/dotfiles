@@ -20,7 +20,9 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 # Syntax highlighting
-source $XDG_CONFIG_HOME/zsh/addons/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # emacs mode
 bindkey -e
