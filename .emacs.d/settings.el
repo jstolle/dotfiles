@@ -18,7 +18,7 @@
  '(custom-raised-buttons nil)
  '(custom-safe-themes
    (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
+    ("f56eb33cd9f1e49c5df0080a3e8a292e83890a61a89bceeaa481a5f183e8e3ef" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(font-lock-support-mode (quote jit-lock-mode))
  '(font-lock-verbose nil)
  '(frame-title-format
@@ -141,19 +141,23 @@
  '(midnight-mode t)
  '(moccur-following-mode-toggle nil)
  '(modelinepos-column-limit 80)
+ '(ns-alternate-modifier (quote alt))
+ '(ns-command-modifier (quote meta))
+ '(ns-function-modifier (quote hyper))
+ '(ns-right-alternate-modifier (quote alt))
  '(package-selected-packages
    (quote
-    (aggressive-indent free-keys focus ace-mc markdown-mode+ flycheck persistent-scratch avy-zap avy auto-complete js3-mode multiple-cursors helpful web-server markdown-preview-mode solarized-theme helm-describe-modes dash-docs helm-descbinds async-await helm-dash helm csv-mode change-inner expand-region diminish-buffer magithub magit-imerge magit-popup magit term-manager multi-term use-package org-link-minor-mode ghub+ f el-mock diminish deferred anaphora ace-jump-mode)))
+    (phi-search-mc phi-search yasnippet-snippets java-snippets ivy-yasnippet go-snippets aws-snippets auto-yasnippet terraform-mode yaml-mode zenburn-theme aggressive-indent free-keys focus ace-mc markdown-mode+ flycheck persistent-scratch avy-zap avy auto-complete js3-mode multiple-cursors helpful web-server markdown-preview-mode solarized-theme helm-describe-modes dash-docs helm-descbinds async-await helm-dash helm csv-mode change-inner expand-region diminish-buffer magithub magit-imerge magit-popup magit term-manager multi-term use-package org-link-minor-mode ghub+ f el-mock diminish deferred anaphora ace-jump-mode)))
  '(parens-require-spaces t)
  '(password-store-password-length 24)
  '(persistent-scratch-autosave-interval 30)
  '(persistent-scratch-backup-directory "~/.cache/emacs/backups")
  '(persistent-scratch-file-name "~/.emacs.d/data/persistent-scratch" t)
- '(persistent-scratch-save-file "/Users/jstolle/.emacs.d/data/persistent-scratch")
+ '(persistent-scratch-save-file "/Users/josh/.emacs.d/data/persistent-scratch")
  '(recentf-auto-cleanup 60)
  '(recentf-exclude
    (quote
-    ("~\\'" "\\`out\\'" "\\.log\\'" "^/[^/]*:" "\\.el\\.gz\\'")) t)
+    ("~\\'" "\\`out\\'" "\\.log\\'" "^/[^/]*:" "\\.el\\.gz\\'")))
  '(recentf-max-saved-items 2000)
  '(recentf-save-file "~/.emacs.d/data/recentf")
  '(redisplay-dont-pause t t)

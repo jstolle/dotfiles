@@ -209,10 +209,19 @@ There are two things you can do about this warning:
         (indent-region beg end-mark nil)
         (align beg end-mark)))))
 
+(use-package auto-yasnippet
+  :after yasnippet
+  :bind (("C-c y a" . aya-create)
+         ("C-c y e" . aya-expand)
+         ("C-c y o" . aya-open-line)))
+
 (use-package avy
   :bind* ("C-." . avy-goto-char-timer)
   :config
   (avy-setup-default))
+
+(use-package aws-snippets
+  :after yasnippet)
 
 (use-package avy-zap
   :bind (("M-z" . avy-zap-to-char-dwim)
@@ -283,6 +292,15 @@ There are two things you can do about this warning:
 
 (use-package free-keys
   :commands free-keys)
+
+(use-package go-snippets
+  :after yasnippet)
+
+(use-package grep
+  :bind (("M-s n" . find-name-dired)
+         ("M-s F" . find-grep)
+         ("M-s G" . grep)
+         ("M-s d" . find-grep-dired)))
 
 (use-package helm
   :defer t
@@ -503,7 +521,6 @@ There are two things you can do about this warning:
 
 (use-package persistent-scratch
   :unless (or (null window-system)
-              alternate-emacs
               noninteractive)
   :defer 5
   :config
@@ -511,6 +528,15 @@ There are two things you can do about this warning:
   (with-demoted-errors "Error: %S"
     (persistent-scratch-setup-default))
   :commands persistent-scratch-setup-default)
+
+(use-package phi-search
+  :defer 5)
+
+(use-package phi-search-mc
+  :after (phi-search multiple-cursors)
+  :config
+  (phi-search-mc/setup-keys)
+  (add-hook 'isearch-mode-mode #'phi-search-from-isearch-mc/setup-keys))
 
 (use-package projectile
   :defer 5
@@ -535,8 +561,31 @@ There are two things you can do about this warning:
                    :after #'my-projectile-invalidate-cache))))
 
 
+(use-package yasnippet
+  :demand t
+  :diminish yas-minor-mode
+  :bind (("C-c y d" . yas-load-directory)
+         ("C-c y i" . yas-insert-snippet)
+         ("C-c y f" . yas-visit-snippet-file)
+         ("C-c y n" . yas-new-snippet)
+         ("C-c y t" . yas-tryout-snippet)
+         ("C-c y l" . yas-describe-tables)
+         ("C-c y g" . yas/global-mode)
+         ("C-c y m" . yas/minor-mode)
+         ("C-c y r" . yas-reload-all)
+         ("C-c y x" . yas-expand))
+  :bind (:map yas-keymap
+              ("C-i" . yas-next-field-or-maybe-expand))
+  :mode ("/\\.emacs\\.d/snippets/" . snippet-mode)
+  :config
+  (yas-load-directory (emacs-path "snippets"))
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets
+  :after yasnippet)
+
 ;;; Layout
-(load-theme 'solarized-dark t)
+(load-theme 'zenburn t)
 
 ;;; Finalization
 
