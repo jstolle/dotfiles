@@ -1,0 +1,2 @@
+root store config:
+  path: gpgcli-gitcli-fs+file:///Users/josh/.local/share/password-store
