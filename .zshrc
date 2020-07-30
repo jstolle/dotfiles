@@ -101,3 +101,6 @@ function genpass () {
   done | gtr 'i' '1' | gtr 'a' '@' | gtr 'o' '0'
   echo ""
 }
+
+gpg2 --homedir "$GNUPSHOME"
+

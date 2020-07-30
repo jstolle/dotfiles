@@ -1,3 +1,5 @@
+[ -d $HOME/.terraform.d/plugin-cache ] && export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
+
 function tf_prompt_info() {
     # dont show 'default' workspace in home dir
     [[ "$PWD" == ~ ]] && return

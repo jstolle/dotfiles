@@ -11,8 +11,12 @@ export GOPATH=$HOME/Go
 export GOBIN=$GOPATH/bin
 
 typeset -U PATH path
-path=("/nix/var/nix/profiles/default/bin" "$HOME/scripts" "$HOME/.local/bin" "$GOBIN" "$path[@]" "/usr/sbin" "/sbin" "/usr/local/sbin")
+path=("$HOME/.nix-profile/bin" "/nix/var/nix/profiles/default/bin" "$HOME/scripts" "$HOME/.local/bin" "$GOBIN" "$path[@]" "/usr/sbin" "/sbin" "/usr/local/sbin")
 export PATH
+
+typeset -U MANPATH manpath
+manpath=("$HOME/.nix-profile/share/man" "/nix/var/nix/profiles/default/share/man" "/usr/local/man" "$manpath[@]")
+export MANPATH
 
 export EDITOR="em"
 export GIT_EDITOR="ec"
@@ -51,9 +55,6 @@ export LESS_TERMCAP_me=$(tput sgr0)
 # Vim config
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
-# Man path
-export MANPATH="/usr/local/man:$MANPATH"
-
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
@@ -62,10 +63,10 @@ export SSH_KEY_PATH="~/.ssh/id_ed25519"
 
 # gpg
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
-gpg2 --homedir "$XDG_DATA_HOME"/gnupg
 
 # zsh highlighting
 if [ -d /usr/local/share/zsh-syntax-highlighting/highlighters ];then
   export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 fi
 
+if [ -e /Users/josh/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/josh/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
