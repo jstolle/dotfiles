@@ -193,24 +193,6 @@ if $OPT_UPDATE; then
     mu index --maildir=$XDG_DATA_HOME/cache/mail
 fi
 
-if [ "${SHELL##*/}" = zsh ]; then
-    echo "==> Oh-My-Zsh"
-    if [ -e $PROJECTDIR/oh-my-zsh ]; then
-        git -C $PROJECTDIR/oh-my-zsh pull
-    else
-        git clone -C "$PROJECTDIR" "$MYGIT/oh-my-zsh"
-    fi
-
-    echo "==> Bullet Train Theme"
-    if [ -e $PROJECTDIR/bullet-train.zsh ]; then
-        git -C "$PROJECTDIR/bullet-train.zsh" pull
-    else
-        git -C "$PROJECTDIR" clone "$MYGIT/bullet-train.zsh"
-    fi
-
-    lnn "$PROJECTDIR/bullet-train.zsh/bullet-train.zsh-theme" "$HOME/dotfiles/.config/zsh/custom"
-fi
-
 echo "==> TMUX"
 if [ -e "$PROJECTDIR/tpm" ]; then
     git -C "$PROJECTDIR/tpm" pull
