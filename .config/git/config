@@ -21,3 +21,5 @@
 	insteadOf = https://bitbucket.org/metrospot/
 [url "ssh://git@github.com/rh-innovation/"]
 	insteadOf = https://github.com/rh-innovation/
+[github]
+	user = jstolle
