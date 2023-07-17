@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: aws_iam_role_data
+# key: aws_iam_role_data
+# --
+
+data "aws_iam_role" "${1:name}" {
+  name = "${2:name}"
+}

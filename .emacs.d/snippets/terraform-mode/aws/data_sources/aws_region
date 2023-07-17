@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: aws_region
+# key: aws_region
+# --
+
+data "aws_region" "${1:current}" {}
+

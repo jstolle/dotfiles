@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: aws_iam_policy_document
+# key: aws_iam_policy_document
+# --
+
+data "aws_iam_policy_document" "${1:name}" {
+  statement {
+    $0
+  }
+}

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: aws_s3_bucket_data
+# key: aws_s3_bucket_data
+# --
+
+data "aws_s3_bucket" "${1:name}" {
+  bucket = "${2:bucket_name}"
+}

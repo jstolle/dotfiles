@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: aws_iam_role
+# key: aws_iam_role
+# --
+
+data "aws_iam_role" "${1:name}" {
+  name               = ${2:name_role}
+  description        = ${3:description}
+  assume_role_policy = ${4:assume_role_policy}
+  tags               = ${5:local.tags}
+}

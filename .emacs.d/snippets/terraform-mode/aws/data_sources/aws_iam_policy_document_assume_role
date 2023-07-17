@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: aws_iam_policy_document_assume_role
+# key: aws_iam_assume_role
+# --
+
+data "aws_iam_policy_document" "${1:$$(yas-choose-value '("ec2" "lambda" "dynamodb"))}_assume_role" {
+  statement {
+    effect  = "Allow"
+    actions = [ "sts:AssumeRole" ]
+
+    principals {
+      type        = "Service"
+      identifiers = [ "${1}.amazonaws.com" ]
+    }
+  }
+}

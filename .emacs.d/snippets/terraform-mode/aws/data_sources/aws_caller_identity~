@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: aws_caller_identity
+# key: aws_caller_identity
+# --
+
+data "aws_caller_identity" "${1:current}" {}
