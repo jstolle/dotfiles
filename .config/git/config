@@ -1,25 +1,25 @@
 [user]
-	name = Josh Tolle (jstolle)
-	email = josh@jstolle.com
+    name = Josh Tolle (jstolle)
+    email = josh@jstolle.com
 [color]
-        ui = auto
+    ui = auto
 [alias]
-	br = branch
-	ci = commit
-	co = checkout
-	cp = cherry-pick
-	df = diff
-  dfc = diff --cached
-	fp = format-patch
-	lg = log -p
-	st = status
+    br = branch
+    ci = commit
+    co = checkout
+    cp = cherry-pick
+    df = diff
+    dfc = diff --cached
+    fp = format-patch
+    lg = log -p
+    st = status
 [core]
-	excludesfile = /Users/jostol01/.config/git/ignore_global
+    excludesfile = /Users/jostol01/.config/git/ignore_global
 [commit]
-	template = /Users/jostol01/.config/git/stCommitMsg
+    template = /Users/jostol01/.config/git/stCommitMsg
 [url "ssh://git@bitbucket.org/metrospot/"]
-	insteadOf = https://bitbucket.org/metrospot/
+    insteadOf = https://bitbucket.org/metrospot/
 [url "ssh://git@github.com/rh-innovation/"]
-	insteadOf = https://github.com/rh-innovation/
+    insteadOf = https://github.com/rh-innovation/
 [github]
-	user = jstolle
+    user = jstolle

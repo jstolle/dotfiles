@@ -4,40 +4,36 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(abbrev-file-name "~/.emacs.d/abbrevs.el")
+ '(backup-directory-alist
+   `(("." \,
+      (expand-file-name "tmp/backups/" user-emacs-directory))))
  '(clean-buffer-list-kill-never-buffer-names
-   (quote
-    ("*scratch*" "*Messages*" "*server*" "*Group*" "*Org Agenda*" "todo.txt" "dfinity.txt" "habits.txt" "Bahai.txt" "OSS.txt" "diary" "notes.txt" "&bitlbee")))
- '(clean-buffer-list-kill-never-regexps
-   (quote
-    ("^ \\*Minibuf-.*\\*$" "^\\*Summary" "^\\*Article" "^#")))
- '(clean-buffer-list-kill-regexps (quote (".*")))
+   '("*scratch*" "*Messages*" "*server*" "*Group*" "*Org Agenda*" "todo.txt" "dfinity.txt" "habits.txt" "Bahai.txt" "OSS.txt" "diary" "notes.txt" "&bitlbee"))
+ '(clean-buffer-list-kill-never-regexps '("^ \\*Minibuf-.*\\*$" "^\\*Summary" "^\\*Article" "^#"))
+ '(clean-buffer-list-kill-regexps '(".*"))
  '(column-number-mode t)
  '(current-language-environment "UTF-8")
- '(custom-buffer-done-function (quote kill-buffer))
+ '(custom-buffer-done-function 'kill-buffer)
  '(custom-file "~/.emacs.d/settings.el")
  '(custom-raised-buttons nil)
  '(custom-safe-themes
-   (quote
-    ("f56eb33cd9f1e49c5df0080a3e8a292e83890a61a89bceeaa481a5f183e8e3ef" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
- '(font-lock-support-mode (quote jit-lock-mode))
+   '("f56eb33cd9f1e49c5df0080a3e8a292e83890a61a89bceeaa481a5f183e8e3ef" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))
+ '(font-lock-support-mode 'jit-lock-mode)
  '(font-lock-verbose nil)
  '(frame-title-format
-   (quote
-    (:eval
+   '(:eval
      (concat
       (if buffer-file-name default-directory "%b")
       "    "
       (number-to-string
        (cdr
-        (assq
-         (quote width)
-         (frame-parameters))))
+        (assq 'width
+              (frame-parameters))))
       "x"
       (number-to-string
        (cdr
-        (assq
-         (quote height)
-         (frame-parameters))))))) t)
+        (assq 'height
+              (frame-parameters)))))) t)
  '(global-auto-complete-mode t)
  '(global-auto-revert-mode t)
  '(global-font-lock-mode t nil (font-lock))
@@ -51,8 +47,7 @@
  '(ibuffer-default-display-maybe-show-predicates t)
  '(ibuffer-expert t)
  '(ibuffer-formats
-   (quote
-    ((mark modified read-only " "
+   '((mark modified read-only " "
            (name 16 -1)
            " "
            (size 6 -1 :right)
@@ -61,11 +56,10 @@
            " " filename)
      (mark " "
            (name 16 -1)
-           " " filename))))
+           " " filename)))
  '(ibuffer-maybe-show-regexps nil)
  '(ibuffer-saved-filter-groups
-   (quote
-    (("default"
+   '(("default"
       ("Commands"
        (or
         (mode . shell-mode)
@@ -118,19 +112,19 @@
         (name . "^\\*scratch\\*$")
         (name . "^\\*Messages\\*$")
         (name . "^\\*\\(Customize\\|Help\\)")
-        (name . "\\*\\(Echo\\|Minibuf\\)")))))))
+        (name . "\\*\\(Echo\\|Minibuf\\)"))))))
  '(ibuffer-show-empty-filter-groups nil)
  '(ibuffer-shrink-to-minimum-size t t)
  '(image-dired-dir "~/.emacs.d/data/image-dired/")
  '(indent-tabs-mode nil)
  '(inhibit-startup-echo-area-message "jstolle")
  '(inhibit-startup-screen t)
- '(initial-major-mode (quote fundamental-mode))
+ '(initial-major-mode 'fundamental-mode)
  '(initial-scratch-message "")
  '(initsplit-customizations-alist
-   (quote
-    (("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "~/.emacs.d/gnus-settings.el" nil nil)
-     ("\\`\\(org-\\|deft-\\|cfw:\\)" "~/.emacs.d/org-settings.el" nil nil))))
+   '(("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "~/.emacs.d/gnus-settings.el" nil nil)
+     ("\\`\\(org-\\|deft-\\|cfw:\\)" "~/.emacs.d/org-settings.el" nil nil)))
+ '(js-indent-level 2)
  '(kill-do-not-save-duplicates t)
  '(kill-ring-max 500)
  '(kill-whole-line t)
@@ -141,13 +135,13 @@
  '(midnight-mode t)
  '(moccur-following-mode-toggle nil)
  '(modelinepos-column-limit 80)
- '(ns-alternate-modifier (quote alt))
- '(ns-command-modifier (quote meta))
- '(ns-function-modifier (quote hyper))
- '(ns-right-alternate-modifier (quote alt))
+ '(ns-alternate-modifier 'alt)
+ '(ns-command-modifier 'meta)
+ '(ns-function-modifier 'hyper)
+ '(ns-right-alternate-modifier 'alt)
+ '(org-agenda-files '("~/tmp/wow.org"))
  '(package-selected-packages
-   (quote
-    (phi-search-mc phi-search yasnippet-snippets java-snippets ivy-yasnippet go-snippets aws-snippets auto-yasnippet terraform-mode yaml-mode zenburn-theme aggressive-indent free-keys focus ace-mc markdown-mode+ flycheck persistent-scratch avy-zap avy auto-complete js3-mode multiple-cursors helpful web-server markdown-preview-mode solarized-theme helm-describe-modes dash-docs helm-descbinds async-await helm-dash helm csv-mode change-inner expand-region diminish-buffer magithub magit-imerge magit-popup magit term-manager multi-term use-package org-link-minor-mode ghub+ f el-mock diminish deferred anaphora ace-jump-mode)))
+   '(jinja2-mode js2-mode typescript-mode go-mode ini-mode json-mode phi-search-mc phi-search ivy-yasnippet auto-yasnippet terraform-mode yaml-mode zenburn-theme aggressive-indent free-keys focus ace-mc markdown-mode+ flycheck persistent-scratch avy-zap avy auto-complete js3-mode multiple-cursors helpful web-server markdown-preview-mode solarized-theme helm-describe-modes dash-docs helm-descbinds async-await helm-dash helm csv-mode change-inner expand-region diminish-buffer magithub magit-imerge magit-popup magit term-manager multi-term use-package org-link-minor-mode ghub+ f el-mock diminish deferred anaphora ace-jump-mode))
  '(parens-require-spaces t)
  '(password-store-password-length 24)
  '(persistent-scratch-autosave-interval 30)
@@ -156,47 +150,41 @@
  '(persistent-scratch-save-file "/Users/josh/.emacs.d/data/persistent-scratch")
  '(recentf-auto-cleanup 60)
  '(recentf-exclude
-   (quote
-    ("~\\'" "\\`out\\'" "\\.log\\'" "^/[^/]*:" "\\.el\\.gz\\'")))
+   '("~\\'" "\\`out\\'" "\\.log\\'" "^/[^/]*:" "\\.el\\.gz\\'") t)
  '(recentf-max-saved-items 2000)
  '(recentf-save-file "~/.emacs.d/data/recentf")
  '(redisplay-dont-pause t t)
  '(same-window-buffer-names
-   (quote
-    ("*eshell*" "*shell*" "*mail*" "*inferior-lisp*" "*ielm*" "*scheme*")))
- '(save-abbrevs (quote silently))
+   '("*eshell*" "*shell*" "*mail*" "*inferior-lisp*" "*ielm*" "*scheme*"))
+ '(save-abbrevs 'silently)
  '(save-interprogram-paste-before-kill t)
  '(save-kill-file-name "~/.emacs.d/data/kill-ring-saved.el" t)
  '(save-place-file "~/.emacs.d/data/places")
  '(savehist-additional-variables
-   (quote
-    (tablist-named-filter file-name-history sr-history-registry kmacro-ring compile-history)))
+   '(tablist-named-filter file-name-history sr-history-registry kmacro-ring compile-history))
  '(savehist-autosave-interval 60)
  '(savehist-file "~/.emacs.d/data/history")
- '(savehist-ignored-variables (quote (load-history flyspell-auto-correct-ring kill-ring)))
+ '(savehist-ignored-variables '(load-history flyspell-auto-correct-ring kill-ring))
  '(scroll-bar-mode nil)
  '(sentence-end-double-space nil)
  '(show-paren-delay 0)
  '(ssl-certificate-verification-policy 1)
  '(switch-to-buffer-preserve-window-point t)
- '(tab-always-indent (quote complete))
+ '(tab-always-indent 'complete)
  '(temp-buffer-resize-mode t nil (help))
  '(text-mode-hook
-   (quote
-    (turn-on-auto-fill
+   '(turn-on-auto-fill
      (lambda nil
        (ignore-errors
-         (diminish
-          (quote auto-fill-function)))))))
+         (diminish 'auto-fill-function)))))
  '(tls-checktrust t)
  '(tls-program
-   (quote
-    ("openssl s_client -connect %h:%p -no_ssl2 -ign_eof -CApath /etc/postfix/certs -cert ~/Messages/me.pem")))
+   '("openssl s_client -connect %h:%p -no_ssl2 -ign_eof -CApath /etc/postfix/certs -cert ~/Messages/me.pem"))
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
  '(trash-directory "~/.Trash")
  '(undo-limit 800000)
- '(undo-tree-history-directory-alist (quote ((".*" . "~/.cache/emacs/backups"))))
+ '(undo-tree-history-directory-alist '((".*" . "~/.cache/emacs/backups")))
  '(undo-tree-mode-lighter "")
  '(undo-tree-visualizer-timestamps t)
  '(url-cache-directory "~/.emacs.d/data/url/cache")
@@ -206,13 +194,13 @@
  '(user-initials "jst")
  '(user-mail-address "josh@jstolle.com")
  '(visible-bell t)
- '(w3m-cookie-accept-bad-cookies (quote ask))
+ '(w3m-cookie-accept-bad-cookies 'ask)
  '(w3m-default-display-inline-images t)
  '(w3m-fill-column 100)
  '(w3m-use-cookies t)
  '(warning-minimum-log-level :error)
  '(window-divider-default-bottom-width 1)
- '(window-divider-default-places (quote bottom-only)))
+ '(window-divider-default-places 'bottom-only))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

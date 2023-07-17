@@ -11,18 +11,18 @@ export GOPATH=$HOME/Go
 export GOBIN=$GOPATH/bin
 
 typeset -U PATH path
-path=("$HOME/.nix-profile/bin" "/nix/var/nix/profiles/default/bin" "$HOME/scripts" "$HOME/.local/bin" "$GOBIN" "$path[@]" "/usr/sbin" "/sbin" "/usr/local/sbin")
+path=("$HOME/scripts" "$HOME/.local/bin" "$GOBIN" "$path[@]" "/usr/sbin" "/sbin" "/usr/local/sbin")
 export PATH
 
 typeset -U MANPATH manpath
-manpath=("$HOME/.nix-profile/share/man" "/nix/var/nix/profiles/default/share/man" "/usr/local/man" "$manpath[@]")
+manpath=("/usr/local/man" "$manpath[@]")
 export MANPATH
 
-export EDITOR="em"
-export GIT_EDITOR="ec"
+export EDITOR="emacsclient"
+export GIT_EDITOR="emacsclient"
 export READER="zathura"
-export VISUAL="ec"
-export CODEEDITOR="em"
+export VISUAL="emacsclient"
+export CODEEDITOR="emacsclient"
 export TERMINAL="hyper"
 export BROWSER="firefox"
 export COLORTERM="truecolor"
@@ -68,5 +68,3 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 if [ -d /usr/local/share/zsh-syntax-highlighting/highlighters ];then
   export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 fi
-
-if [ -e /Users/josh/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/josh/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

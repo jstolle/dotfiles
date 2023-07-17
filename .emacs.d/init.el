@@ -220,9 +220,6 @@ There are two things you can do about this warning:
   :config
   (avy-setup-default))
 
-(use-package aws-snippets
-  :after yasnippet)
-
 (use-package avy-zap
   :bind (("M-z" . avy-zap-to-char-dwim)
          ("M-Z" . avy-zap-up-to-char-dwim)))
@@ -236,6 +233,11 @@ There are two things you can do about this warning:
 
 (use-package csv-mode
   :mode "\\.csv\\'")
+
+(use-package display-line-numbers-mode
+  :defer t
+  :config
+  (global-display-line-numbers-mode))
 
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
@@ -293,9 +295,6 @@ There are two things you can do about this warning:
 (use-package free-keys
   :commands free-keys)
 
-(use-package go-snippets
-  :after yasnippet)
-
 (use-package grep
   :bind (("M-s n" . find-name-dired)
          ("M-s F" . find-grep)
@@ -323,6 +322,9 @@ There are two things you can do about this warning:
 (use-package helm-describe-modes
   :after helm
   :bind ("C-h m" . helm-describe-modes))
+
+(use-package js2-mode
+  :mode (("\\.js\\'"          . js2-mode)))
 
 (use-package magit
   :bind (("C-x g" . magit-status)
@@ -384,12 +386,12 @@ There are two things you can do about this warning:
   (eval-after-load 'magit-remote
     '(progn
        (magit-define-popup-action 'magit-fetch-popup
-         ?f 'magit-get-remote #'magit-fetch-from-upstream ?u t)
+                                  ?f 'magit-get-remote #'magit-fetch-from-upstream ?u t)
        (magit-define-popup-action 'magit-pull-popup
-         ?F 'magit-get-upstream-branch #'magit-pull-from-upstream ?u t)
+                                  ?F 'magit-get-upstream-branch #'magit-pull-from-upstream ?u t)
        (magit-define-popup-action 'magit-push-popup
-         ?P 'magit--push-current-to-upstream-desc
-         #'magit-push-current-to-upstream ?u t))))
+                                  ?P 'magit--push-current-to-upstream-desc
+                                  #'magit-push-current-to-upstream ?u t))))
 
 (use-package magit-popup
   :defer t)
@@ -580,9 +582,6 @@ There are two things you can do about this warning:
   :config
   (yas-load-directory (emacs-path "snippets"))
   (yas-global-mode 1))
-
-(use-package yasnippet-snippets
-  :after yasnippet)
 
 ;;; Layout
 (load-theme 'zenburn t)

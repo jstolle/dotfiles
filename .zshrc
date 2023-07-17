@@ -1,6 +1,9 @@
 # Leave if not interactive
 [[ $- != *i* ]] && return
 
+# Add default NIX bin to path
+path+=(/nix/var/nix/profiles/default/bin)
+
 # Pretty colors
 autoload -U colors && colors
 
@@ -18,11 +21,6 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 #zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
-
-# Syntax highlighting
-if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
 
 # emacs mode
 bindkey -e
@@ -102,5 +100,7 @@ function genpass () {
   echo ""
 }
 
-gpg2 --homedir "$GNUPSHOME"
+source /Users/josh/.config/broot/launcher/bash/br
 
+[ -n "$TMUX" ] && aws_profile=$(tmux show-environment AWS_PROFILE 2>/dev/null)
+[ -n "$aws_profile" ] && export $aws_profile
