@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# set -xv
+
+JQ="jq -r .Reservations[].Instances[].PrivateIpAddress"
+
+CMD="aws"
+
+[[ ${#AWS_DEFAULT_REGION} -eq 0 ]] && CMD="${CMD} --region us-east-1"
+
+if [[ $1 == "--profile" ]]; then
+  CMD="${CMD} $1 $2"
+  shift 2
+fi
+
+CMD="${CMD} ec2 describe-instances"
+
+function usage() {
+  echo "$0 <identifier> [<identifier2> ... <identifierN>]"
+}
+
+if [[ $# -lt 1 ]]; then
+  usage
+  exit 1
+fi
+
+declare -a names
+declare -a ids
+
+while [ $# -gt 0 ]; do
+  if [[ $1 == "i-*" ]]; then
+    ids[${#ids[*]}]="$1"
+  else
+    names[${#names[*]}]="$1"
+  fi
+
+  shift
+done
+
+[[ ${#ids[*]} -gt 0 ]] && CMD="${CMD} --instance-ids ${ids[*]}"
+
+[[ ${#names[*]} -gt 0 ]] && CMD="${CMD} --filters Name=tag:Name,Values=$(echo ${names[*]} | tr ' ' ',') Name=instance-state-name,Values=running"
+
+$CMD | $JQ

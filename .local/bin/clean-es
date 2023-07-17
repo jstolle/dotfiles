@@ -1,0 +1,15 @@
+#!/bin/bash
+
+TAG=$1
+
+for ip in $(get-ec2-ip $TAG); do
+    echo $ip
+    ssh $ip '[ -d /var/log/elasticsearch ] || exit ;
+        uptime && \
+        df -h | grep "/\$" && \
+        sudo find /var/log/elasticsearch -name "gc.log.*" -mtime +2 -exec rm {} \; && \
+        sudo find /var/log/elasticsearch -name "*.gz" -mtime +2 -exec rm {} \; && \
+        sudo apt clean && \
+        sudo journalctl --vacuum-time=2weeks && \
+        df -h | grep "/\$"'
+done
